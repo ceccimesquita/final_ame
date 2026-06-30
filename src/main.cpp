@@ -64,7 +64,7 @@ int main() {
 
     sleep_ms(2000);
 
-    printf("=== HAR TinyML — Raspberry Pi Pico ===\n");
+    printf("HAR TinyML — Raspberry Pi Pico\n");
     stdio_flush();
 
     MPU6050_light mpu(i2c1, 2, 3, 100000);
@@ -185,6 +185,9 @@ int main() {
                 best_class = i;
             }
         }
+
+        for (uint pin : LED_PINS) gpio_put(pin, 0);
+        gpio_put(LED_PINS[best_class], 1);
 
         printf("Atividade: %-10s  (scores: %4d %4d %4d %4d)\n",
                LABELS[best_class],
